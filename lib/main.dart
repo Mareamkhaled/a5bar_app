@@ -1,4 +1,4 @@
-import 'package:a5bar_app/screens/home_screen.dart';
+import 'screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
          debugShowCheckedModeBanner: false,
          home: HomeScreen(),
     );

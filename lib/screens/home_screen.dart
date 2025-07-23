@@ -1,5 +1,4 @@
-import 'package:a5bar_app/widgets/categories_item.dart';
-import 'package:a5bar_app/widgets/categories_you_like.dart';
+import '../widgets/categories_you_like.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -12,7 +11,7 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.black,
-        title: Text(
+        title: const Text(
           "News",
           style: TextStyle(
             color: Colors.white,
@@ -21,11 +20,12 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
+      body: const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           children: [
-            CategoriesYouLike()
+            CategoriesYouLike(),
+            
           ],
         ),
       ),

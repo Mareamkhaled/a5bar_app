@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 
-class CategoriesItem extends StatelessWidget {
-  const CategoriesItem({super.key});
+import '../models/categories_model.dart';
 
+class CategoriesItem extends StatelessWidget {
+  const CategoriesItem({super.key, required this.categoriesModel});
+  final CategoriesModel categoriesModel;
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 250,
       height: 150,
       decoration: BoxDecoration(
-        color: Colors.amber
+        image: DecorationImage(image: AssetImage(categoriesModel.image))
       ),
 
       child:Container(
@@ -17,7 +19,7 @@ class CategoriesItem extends StatelessWidget {
             // color: Colors.black54,
             alignment: Alignment.bottomCenter,
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.black12,
          ),
               height: 20,
@@ -25,8 +27,8 @@ class CategoriesItem extends StatelessWidget {
               
               child: Text(
                 textAlign: TextAlign.start,
-                "Category Name",
-                style: const TextStyle(
+                categoriesModel.title,
+                style:const TextStyle(
                   color: Colors.white,
                   // fontSize: 25,
                   fontWeight: FontWeight.bold,
