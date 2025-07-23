@@ -28,6 +28,18 @@ class HomeScreen extends StatelessWidget {
           children: [
             CategoriesYouLike(),
             CustomCarouselSlider(),
+            SizedBox(height: 20),
+            Row(
+              children: [
+                Text("News For you",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    )),
+              ],
+            ),
+            
           ],
         ),
       ),
