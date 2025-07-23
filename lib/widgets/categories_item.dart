@@ -22,15 +22,15 @@ class CategoriesItem extends StatelessWidget {
               decoration: const BoxDecoration(
                 color: Colors.black12,
          ),
-              height: 20,
+              height: 50,
               width: double.infinity,
               
               child: Text(
-                textAlign: TextAlign.start,
+                textAlign: TextAlign.center,
                 categoriesModel.title,
                 style:const TextStyle(
                   color: Colors.white,
-                  // fontSize: 25,
+                  fontSize: 25,
                   fontWeight: FontWeight.bold,
                 ),
               ),

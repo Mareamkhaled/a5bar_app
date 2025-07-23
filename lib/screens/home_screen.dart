@@ -1,6 +1,8 @@
 import '../widgets/categories_you_like.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/custom_carousel_slider.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -25,7 +27,7 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             CategoriesYouLike(),
-            
+            CustomCarouselSlider(),
           ],
         ),
       ),
