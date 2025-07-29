@@ -1,17 +1,19 @@
 class NewsModel {
-  String? title;
-  String? description;
-  String? url;
+  String title;
+  String description;
+  String urlToImage;
+  String url;
   String? publishedAt;
 
-  NewsModel({this.title, this.description, this.url, this.publishedAt});
+  NewsModel({required this.title,required this.description,required this.urlToImage, this.publishedAt,required this.url});
 
  factory NewsModel.fromJson(Map<String, dynamic> json) {
     return NewsModel(
       title: json['title'],
       description: json['description'],
-      url: json['urlToImage'] ?? '',
+      urlToImage: json['urlToImage'],
       publishedAt: json['publishedAt'],
+      url: json['url'],
     );
   }
 
