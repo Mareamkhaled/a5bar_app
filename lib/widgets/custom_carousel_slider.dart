@@ -11,7 +11,12 @@ class CustomCarouselSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     return CarouselSlider(
   items: categoriresList.map((category) {
-    return CategoriesItem(categoriesModel: category);
+    return GestureDetector(
+      onTap: () {
+      print("Tapped on category: $category.title");
+        Navigator.pushNamed(context, '/category', arguments: category.title);
+      },
+      child: CategoriesItem(categoriesModel: category));
   }).toList(),
   options: CarouselOptions(
     height: 180,

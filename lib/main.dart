@@ -1,3 +1,4 @@
+import 'screens/category_screen.dart';
 import 'screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -10,9 +11,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      routes: {
+        '/category': (context) =>const CategoryScreen(),
+      },
          debugShowCheckedModeBanner: false,
-         home: HomeScreen(),
+         home:const HomeScreen(),
     );
   }
 }

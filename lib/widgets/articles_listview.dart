@@ -21,18 +21,16 @@ class _ArticlesListviewState extends State<ArticlesListview> {
   }
 
   getArticles() async {
-    articles = await apiService.getNews();
-    //! important to call setState to update the UI after fetching data 
-    setState(() {
-      
-    });
+    articles = await apiService.getNews('general');
+    //! important to call setState to update the UI after fetching data
+    setState(() {});
     // print(articles.length);
   }
 
   @override
   Widget build(BuildContext context) {
     return articles.isEmpty
-    //! sliverToBoxAdapter is used to show a widget when the list is empty
+        //! sliverToBoxAdapter is used to show a widget when the list is empty
         ? const SliverToBoxAdapter(
           child: Center(child: CircularProgressIndicator()),
         )

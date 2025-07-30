@@ -21,17 +21,22 @@ class _NewsItemState extends State<NewsItem> {
           onTap: () {
             _launchUrl();
           },
-          child: Container(
+          child: Image.network(
+            widget.newsModel.urlToImage ?? "",
+            fit: BoxFit.cover,
             width: double.infinity,
             height: 200,
-            decoration: BoxDecoration(
-              // color: Colors.grey[800],
-              image: DecorationImage(
-                image: NetworkImage(widget.newsModel.urlToImage),
-                fit: BoxFit.cover,
-              ),
-              borderRadius: BorderRadius.circular(10),
-            ),
+            loadingBuilder: (context, child, loadingProgress) {
+              if (loadingProgress == null) return child;
+              return const Center(child: CircularProgressIndicator());
+            },
+            errorBuilder: (context, error, stackTrace) {
+              return Container(
+                color: Colors.grey[300],
+                alignment: Alignment.center,
+                child: const Icon(Icons.broken_image, size: 40),
+              );
+            },
           ),
         ),
         const SizedBox(height: 5),
@@ -57,7 +62,7 @@ class _NewsItemState extends State<NewsItem> {
 
             maxLines: isExpanded ? null : 2,
 
-            widget.newsModel.description,
+            widget.newsModel.description ?? '',
             style: const TextStyle(color: Colors.white70, fontSize: 14),
           ),
         ),

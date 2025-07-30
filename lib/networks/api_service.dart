@@ -6,14 +6,14 @@ class ApiService {
   var dio = Dio(
     BaseOptions(
       baseUrl: "https://newsapi.org/v2/",
-      connectTimeout: const Duration(seconds: 5),
-      receiveTimeout: const Duration(seconds: 5),
+      connectTimeout: const Duration(seconds: 20),
+      receiveTimeout: const Duration(seconds: 20),
     ),
   );
 
-  Future<List<NewsModel>> getNews() async {
+  Future<List<NewsModel>> getNews(String category) async {
     var response = await dio.get(
-      'top-headlines?country=us&apiKey=2ba79a18fdb6445daae819948c149be5',
+      'top-headlines?country=us&apiKey=2ba79a18fdb6445daae819948c149be5&category=$category',
     );
     List articles = response.data['articles'];
 
