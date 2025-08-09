@@ -26,17 +26,7 @@ class _NewsItemState extends State<NewsItem> {
             fit: BoxFit.cover,
             width: double.infinity,
             height: 200,
-            loadingBuilder: (context, child, loadingProgress) {
-              if (loadingProgress == null) return child;
-              return const Center(child: CircularProgressIndicator());
-            },
-            errorBuilder: (context, error, stackTrace) {
-              return Container(
-                color: Colors.grey[300],
-                alignment: Alignment.center,
-                child: const Icon(Icons.broken_image, size: 40),
-              );
-            },
+          
           ),
         ),
         const SizedBox(height: 5),

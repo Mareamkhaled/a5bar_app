@@ -1,62 +1,58 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../models/news_model.dart';
-import '../networks/api_service.dart';
+import '../cubit/news_cubit.dart';
+import '../cubit/news_state.dart';
 import '../widgets/news_item.dart';
 
-class CategoryScreen extends StatefulWidget {
-  const CategoryScreen({super.key});
+class CategoryScreen extends StatelessWidget {
+  const CategoryScreen({super.key, required this.category});
 
-  @override
-  State<CategoryScreen> createState() => _CategoryScreenState();
-}
-
-class _CategoryScreenState extends State<CategoryScreen> {
-  ApiService apiService = ApiService();
-  List<NewsModel> articles = [];
-  String? category;
-  @override
-  void initState() {
-    super.initState();
-    Future.delayed(Duration.zero, () {
-      // ignore: use_build_context_synchronously
-      category = ModalRoute.of(context)?.settings.arguments as String;
-      getArticles(category ?? "category news");
-    });
-  }
-
-  getArticles(String category) async {
-    articles = await apiService.getNews(category);
-    //! important to call setState to update the UI after fetching data
-    setState(() {});
-    // print(articles.length);
-  }
+  final String category;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(
+    return BlocProvider(
+      create: (_) => NewsCubit()..getArticles(category: category),
+      child: Scaffold(
         backgroundColor: Colors.black,
-        title: Text(
-          '$category News',
-          style: const TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
+        appBar: AppBar(
+          backgroundColor: Colors.black,
+          title: Text(
+            '$category News',
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
-      ),
-      body:
-          articles.isEmpty
-              ? const Center(child: CircularProgressIndicator())
-              : Padding(
+        body: BlocBuilder<NewsCubit, NewsState>(
+          builder: (context, state) {
+            if (state is NewsLoading) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (state is NewsLoaded) {
+              return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ListView.builder(
-                  itemCount: articles.length,
+                  itemCount: state.articles.length,
                   itemBuilder:
-                      (context, index) => NewsItem(newsModel: articles[index]),
+                      (context, index) =>
+                          NewsItem(newsModel: state.articles[index]),
                 ),
-              ),
+              );
+            } else if (state is NewsError) {
+              return Center(
+                child: Text(
+                  state.message,
+                  style: const TextStyle(color: Colors.red),
+                ),
+              );
+            } else {
+              return const SizedBox.shrink();
+            }
+          },
+        ),
+      ),
     );
   }
 }
